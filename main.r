@@ -40,3 +40,40 @@ print(quartiles)
 
 cat("\nPercentiles:\n")
 print(percentiles)
+
+# 4. Graphical Analysis
+
+# Histogram of Total Emissions
+hist(total_emissions,
+  main = "Histogram of Total Emissions",
+  xlab = "Total Emissions (kg CO₂ eq)",
+  ylab = "Frequency",
+  col = "#69b3a2",
+  border = "black",
+  breaks = 10
+)
+
+# Adding vertical lines for mean and median in the histogram
+abline(v = mean_value, col = "red", lwd = 2, lty = 2) # Mean line
+abline(v = median_value, col = "blue", lwd = 2, lty = 2) # Median line
+legend("topright",
+  legend = c("Mean", "Median"),
+  col = c("red", "blue"),
+  lty = c(2, 2),
+  lwd = 2,
+  bty = "n"
+)
+
+# Boxplot of Total Emissions
+boxplot(total_emissions,
+  main = "Boxplot of Total Emissions",
+  ylab = "Total Emissions (kg CO₂ eq)",
+  col = "#ff6347",
+  notch = TRUE
+)
+
+# Adding explanation about the boxplot
+mtext(
+  "Notch represents the confidence interval of the median",
+  side = 3, line = 1, cex = 0.8
+)

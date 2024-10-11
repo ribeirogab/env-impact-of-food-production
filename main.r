@@ -1,8 +1,7 @@
-# GabrielRibeiro_RM12345_fase2_cap9
+# GabrielRibeiro_RM560173_fase2_cap7
 
 data <- read.csv("data.csv")
 
-# Selecting the continuous quantitative variable - Total Emissions
 total_emissions <- data$Total_Emissions
 
 # 1. Measures of Central Tendency
@@ -41,19 +40,18 @@ print(quartiles)
 cat("\nPercentiles:\n")
 print(percentiles)
 
-# 4. Graphical Analysis
+# 4. Graphical Analysis of the Quantitative Variable
 
 # Histogram of Total Emissions
 hist(total_emissions,
   main = "Histogram of Total Emissions",
-  xlab = "Total Emissions (kg CO₂ eq)",
+  xlab = "Total Emissions (kg CO2 eq)",
   ylab = "Frequency",
   col = "#69b3a2",
   border = "black",
   breaks = 10
 )
 
-# Adding vertical lines for mean and median in the histogram
 abline(v = mean_value, col = "red", lwd = 2, lty = 2) # Mean line
 abline(v = median_value, col = "blue", lwd = 2, lty = 2) # Median line
 legend("topright",
@@ -64,16 +62,34 @@ legend("topright",
   bty = "n"
 )
 
-# Boxplot of Total Emissions
 boxplot(total_emissions,
   main = "Boxplot of Total Emissions",
-  ylab = "Total Emissions (kg CO₂ eq)",
+  ylab = "Total Emissions (kg CO2 eq)",
   col = "#ff6347",
-  notch = TRUE
+  notch = FALSE
 )
 
-# Adding explanation about the boxplot
-mtext(
-  "Notch represents the confidence interval of the median",
-  side = 3, line = 1, cex = 0.8
+# 5. Graphical Analysis of the Qualitative Variable
+
+food_type <- data$Food_Type
+impact_level <- data$Impact_Level
+
+# Converting Impact Level to numeric values
+# (1 for Baixo, 2 for Medio, 3 for Alto)
+impact_level_numeric <- ifelse(
+  impact_level == "Baixo", 1,
+  ifelse(impact_level == "Medio", 2, 3)
 )
+
+# Setting up the bar plot for Impact Level by Food Type
+barplot(impact_level_numeric,
+  names.arg = food_type,
+  main = "Impact Level by Food Type",
+  xlab = "Food Type",
+  ylab = "Impact Level (1: Low, 2: Medium, 3: High)",
+  col = "skyblue",
+  las = 2,
+  cex.names = 0.8
+)
+
+grid(nx = NA, ny = NULL, lty = 1, lwd = 0.5, col = "gray")
